@@ -1,0 +1,81 @@
+<?php
+/**
+ *
+ * @category   Marketing
+ * @package    ConversionBug_Onesignal
+ * @author     shiv kumar singh <shivam.kumar@conversionbug.com>
+ * @website    http://www.conversionbug.com/
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php $helper =  $this->getHelper();?>
+<?php if ($helper->isEnabled()): ?>
+    <link rel="manifest" href="/manifest.json">
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        var OneSignal = OneSignal || [];
+        OneSignal.push(["init", {
+            appId: "<?php echo $helper->getAppId() ?>",
+            <?php if( $helper->isSslEnabled() == 0):?>
+            subdomainName: "<?php echo $helper->getSubdomainName()?>",
+            <?php endif;?>
+            autoRegister: <?php echo $helper->isAutoRegisterEnabled() ?>,
+            safari_web_id: "<?php echo $helper->getSafariWebId() ?>",
+            notifyButton: {
+                enable: <?php echo $helper->isNotifyButtonEnabled() ?>, // Required to use the notify button
+                size: "<?php echo $helper->getIconSize() ?>", // One of 'small', 'medium', or 'large'
+                theme: "<?php echo $helper->getIconTheme() ?>", // One of 'default' (red-white) or 'inverse" (white-red)
+                position: "<?php echo $helper->getIconPosition() ?>", // Either 'bottom-left' or 'bottom-right'
+                offset: {
+                    bottom: '0px',
+                    left: "<?php echo $helper->getIconLeft() ?>px", // Only applied if bottom-left
+                    right: "<?php echo $helper->getIconRight() ?>px" // Only applied if bottom-right
+                },
+                prenotify: "<?php echo $helper->isPrenotify() ?>", // Show an icon with 1 unread message for first-time site visitors
+                showCredit: false, // Hide the OneSignal logo
+                text: {
+                    'tip.state.unsubscribed': "<?php echo $helper->getTextTipStateUnsubscribed() ?>",
+                    'tip.state.subscribed': "<?php echo $helper->getTextTipStateSubscribed() ?>",
+                    'tip.state.blocked': "<?php echo $helper->getTextTipStateBlocked() ?>",
+                    'message.prenotify': "<?php echo $helper->getTextMessagePrenotify() ?>",
+                    'message.action.subscribed': "<?php echo $helper->getTextMessageActionSubscribed() ?>",
+                    'message.action.resubscribed': "<?php echo $helper->getTextMessageActionResubscribed() ?>",
+                    'message.action.unsubscribed': "<?php echo $helper->getTextMessageActionUnsubscribed() ?>",
+                    'dialog.main.title': "<?php echo $helper->getTextDialogMainTitle() ?>",
+                    'dialog.main.button.subscribe': "<?php echo $helper->getTextDialogMainButtonSubscribe() ?>",
+                    'dialog.main.button.unsubscribe': "<?php echo $helper->getTextDialogMainButtonUnsubscribe() ?>",
+                    'dialog.blocked.title': "<?php echo $helper->getTextDialogBlockedTitle() ?>",
+                    'dialog.blocked.message': "<?php echo $helper->getTextDialogBlockedMessage() ?>"
+                }, colors: { // Customize the colors of the main button and dialog popup button
+                    'circle.background': "<?php echo $helper->getColorCircleBackground() ?>",
+                    'circle.foreground': "<?php echo $helper->getColorCircleForeground() ?>",
+                    'badge.background': "<?php echo $helper->getColorBadgeBackground() ?>",
+                    'badge.foreground': "<?php echo $helper->getColorBadgeForeground() ?>",
+                    'badge.bordercolor': "<?php echo $helper->getColorBadgeBorderColor() ?>",
+                    'pulse.color': "<?php echo $helper->getColorPulseColor() ?>",
+                    'dialog.button.background.hovering': "<?php echo $helper->getColorDialogHovering() ?>",
+                    'dialog.button.background.active': "<?php echo $helper->getColorDialogActive() ?>",
+                    'dialog.button.background': "<?php echo $helper->getColorDialogBackground() ?>",
+                    'dialog.button.foreground': "<?php echo $helper->getColorDialogForeground() ?>"
+                },
+
+            },
+            promptOptions: {
+                showCredit: false, // Hide Powered by OneSignal
+                actionMessage: "<?php echo $helper->getOnesignalPromptActionMessage() ?>",
+                exampleNotificationTitleDesktop: "<?php echo $helper->getOnesignalPromptExampleNotificationTitleDesktop() ?>",
+                exampleNotificationMessageDesktop: "<?php echo $helper->getOnesignalPromptExampleNotificationMessageDesktop() ?>",
+                exampleNotificationTitleMobile: " <?php echo $helper->getOnesignalPromptExampleNotificationTitleMobile() ?>",
+                exampleNotificationMessageMobile: "<?php echo $helper->getOnesignalPromptExampleNotificationMessageMobile() ?>",
+                exampleNotificationCaption: "<?php echo $helper->getOnesignalPromptExampleNotificationCaption() ?>",
+                acceptButtonText: "<?php echo $helper->getOnesignalPromptAcceptbuttontext() ?>".toUpperCase(),
+                cancelButtonText: "<?php echo $helper->getOnesignalPromptCancelbuttontext() ?>".toUpperCase()
+            }
+        }]);
+        OneSignal.push(function () {
+            OneSignal.setDefaultNotificationUrl("<?php echo $this->getBaseUrl() ?>");
+        });
+        //]]>
+    </script>
+<?php endif; ?>

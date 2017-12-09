@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * @category   Marketing
+ * @package    ConversionBug_Onesignal
+ * @author     shiv kumar singh <shivam.kumar@conversionbug.com>
+ * @website    http://www.conversionbug.com/
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <!-- Settings -->
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="ConversionBug_Onesignal::config" title="Conversion Bug - Onesignal" sortOrder="50" />
+                            <resource id="ConversionBug_Onesignal::pushconfig" title="Conversion Bug -Push Onesignal Notification" sortOrder="51" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>
